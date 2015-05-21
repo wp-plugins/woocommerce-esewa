@@ -55,7 +55,7 @@ class WC_Gateway_eSewa_Request {
 		WC_Gateway_eSewa::log( 'Generating payment form for order ' . $order->get_order_number() . '. Notify URL: ' . $this->notify_url );
 
 		return apply_filters( 'woocommerce_esewa_args', array(
-			'amt'   => wc_format_decimal( $this->get_order_subtotal( $order ), 2 ),
+			'amt'   => wc_format_decimal( $order->get_subtotal() - $order->get_total_discount(), 2 ),
 			'txAmt' => wc_format_decimal( $order->get_total_tax(), 2 ),
 			'pdc'   => wc_format_decimal( $order->get_total_shipping(), 2 ),
 			'psc'   => wc_format_decimal( $this->get_service_charge( $order ), 2 ),
@@ -68,32 +68,18 @@ class WC_Gateway_eSewa_Request {
 	}
 
 	/**
-	 * Get the subtotal to send to eSewa
-	 * @param  WC_Order $order
-	 * @return float
-	 */
-	private function get_order_subtotal( $order ) {
-		$subtotal = 0;
-		foreach ( $order->get_items() as $item ) {
-			$subtotal += ( isset( $item['line_subtotal'] ) ) ? $item['line_subtotal'] : 0;
-		}
-
-		return $subtotal;
-	}
-
-	/**
 	 * Get the service charge to send to eSewa
 	 * @param  WC_Order $order
 	 * @return float
 	 */
 	private function get_service_charge( $order ) {
-		$charge = 0;
+		$fee_total = 0;
 		if ( sizeof( $order->get_fees() ) > 0 ) {
 			foreach ( $order->get_fees() as $item ) {
-				$charge += ( isset( $item['line_total'] ) ) ? $item['line_total'] : 0;
+				$fee_total += ( isset( $item['line_total'] ) ) ? $item['line_total'] : 0;
 			}
 		}
 
-		return $charge;
+		return $fee_total;
 	}
 }
