@@ -3,7 +3,7 @@ Contributors: axisthemes, shivapoudel
 Tags: woocommerce, esewa
 Requires at least: 4.0
 Tested up to: 4.2.2
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,17 +88,22 @@ For downloadable products to WooCommerce default setting is to allow access only
 
 == Changelog ==
 
-= 1.0.2 =
+= 1.1.0 =
+* Dev - Deploy corrections.
 
+= 1.0.2 =
 * Fix - Ensure coupon discount are applied when processing checkout.
 * Dev - Included grunt-wp-plugin for deploying.
 * Refactor - Subtotal amount values.
 
 = 1.0.1 =
-
 * Fix - When eSewa payment is on hold, reduce stock and empty cart.
 * Tweak - Change method description for eSewa settings page.
 
 = 1.0.0 =
-
 * First stable release.
+
+== Upgrade Notice ==
+
+= 1.1.0 =
+1.1.0 is a major update so it is important that you make backups, test extensions and your theme prior to updating. Developers should catch up with [develop.axisthemes.com](http://develop.axisthemes.com/) to see what has been happening in core.
